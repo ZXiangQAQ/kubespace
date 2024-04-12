@@ -4,6 +4,7 @@ export { default as ExecuteShell } from './execShell'
 export { default as AppDeploy } from './appDeploy'
 export { default as Release } from './release'
 export { default as DeployK8s } from './deployK8s'
+export { default as SonarQube } from './sonarQube'
 
 export function checkPluginJob(job) {
   if(!job) {
@@ -28,7 +29,9 @@ export function checkPluginJob(job) {
   if(job.plugin_key == "release") {
     res = checkRelease(job)
   }
-
+  if (job.plugin_key == "sonar_qube") {
+    res = checkSonarQube(job)
+  }
   if(!res) {
     return {checked: false, errorMsg: "任务插件参数错误"}
   }
@@ -102,5 +105,24 @@ function checkExecShell(job) {
 }
 
 function checkRelease(job) {
+  return {checked: true}
+}
+
+function checkSonarQube(job) {
+  if(!job.params) {
+    return {checked: false, errorMsg: "参数错误"}
+  }
+  let jobParams = job.params
+  if(jobParams.sonar_scanner_type == 'script') {
+    if(!jobParams.sonar_scanner_script) {
+      return {checked: false, errorMsg: "自定义配置不能为空"}
+    }
+  }
+  if(!jobParams.sonar_scanner_image) {
+    return {checked: false, errorMsg: "扫描使用的基础镜像不能为空"}
+  }
+  if(!jobParams.sonar_qube_id) {
+    return {checked: false, errorMsg: "SonarQube令牌不能为空"}
+  }
   return {checked: true}
 }

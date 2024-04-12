@@ -361,6 +361,9 @@ const (
 	BuiltinPluginRelease = "release"
 	// BuiltinPluginDeployK8s 替换镜像，并部署k8s资源
 	BuiltinPluginDeployK8s = "deploy_k8s"
+
+	// BuiltinPluginSonarQube 代码扫描
+	BuiltinPluginSonarQube = "sonar_qube"
 )
 
 const PipelinePluginBuiltinUrl = "builtin"
@@ -399,6 +402,9 @@ const (
 
 	// PluginParamsFromPipelineEnv 流水线执行到当前的所有参数
 	PluginParamsFromPipelineEnv = "pipeline_env"
+
+	// PluginParamsFromSonarQube 平台配置中的代码扫描配置
+	PluginParamsFromSonarQube = "sonar_qube"
 )
 
 type PipelinePluginParamsSpec struct {

@@ -40,6 +40,8 @@ const (
 	AuditResourcePlatformUser     = "用户"
 
 	AuditResourcePermission = "权限"
+
+	AuditResourceSonarQube = "SonarQube"
 )
 
 // AuditOperate 操作审计

@@ -5,6 +5,7 @@ import (
 	"github.com/kubespace/kubespace/pkg/server/api/settings/image_registry"
 	"github.com/kubespace/kubespace/pkg/server/api/settings/secret"
 	"github.com/kubespace/kubespace/pkg/server/api/settings/settings"
+	"github.com/kubespace/kubespace/pkg/server/api/settings/sonar_qube"
 	"github.com/kubespace/kubespace/pkg/server/config"
 	"net/http"
 )
@@ -30,6 +31,11 @@ func (a *apiGroup) Apis() []*api.Api {
 		api.NewApi(http.MethodPost, "/image_registry", image_registry.CreateHandler(a.config)),
 		api.NewApi(http.MethodPut, "/image_registry/:id", image_registry.UpdateHandler(a.config)),
 		api.NewApi(http.MethodDelete, "/image_registry/:id", image_registry.DeleteHandler(a.config)),
+
+		api.NewApi(http.MethodPost, "/sonar_qube", sonar_qube.CreateHandler(a.config)),
+		api.NewApi(http.MethodDelete, "/sonar_qube/:id", sonar_qube.DeleteHandler(a.config)),
+		api.NewApi(http.MethodPut, "/sonar_qube/:id", sonar_qube.UpdateHandler(a.config)),
+		api.NewApi(http.MethodGet, "/sonar_qube", sonar_qube.ListHandler(a.config)),
 	}
 	return apis
 }

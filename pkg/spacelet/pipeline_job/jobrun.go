@@ -40,6 +40,7 @@ func NewSpaceletJobRun(dataDir string, client *httpclient.HttpClient) *SpaceletJ
 	p.plugins[types.BuiltinPluginBuildCodeToImage] = plugins.CodeBuilderPlugin{}
 	p.plugins[types.BuiltinPluginExecuteShell] = plugins.ExecShellPlugin{}
 	p.plugins[types.BuiltinPluginRelease] = plugins.NewReleasePlugin(client)
+	p.plugins[types.BuiltinPluginSonarQube] = plugins.SonarScanner{}
 	return p
 }
 

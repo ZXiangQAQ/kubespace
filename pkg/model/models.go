@@ -47,6 +47,7 @@ type Models struct {
 
 	SettingsSecretManager *settings.SettingsSecretManager
 	ImageRegistryManager  *settings.ImageRegistryManager
+	SonarQubeManager      *settings.SonarQubeManager
 
 	LdapManager     *settings.LdapManager
 	SpaceletManager *spacelet.SpaceletManager
@@ -74,6 +75,7 @@ func NewModels(c *Config) (*Models, error) {
 
 	secrets := settings.NewSettingsSecretManager(c.DB.Instance)
 	imageRegistry := settings.NewSettingsImageRegistryManager(c.DB.Instance)
+	sonarQubeMgr := settings.NewSonarQubeManager(c.DB.Instance)
 
 	ldap := settings.NewLdapManager(c.DB.Instance)
 
@@ -107,6 +109,7 @@ func NewModels(c *Config) (*Models, error) {
 		PipelineTriggerEventManager: pipelineTriggerEventMgr,
 		PipelineCodeCacheManager:    pipelineCodeCacheMgr,
 		SettingsSecretManager:       secrets,
+		SonarQubeManager:            sonarQubeMgr,
 		LdapManager:                 ldap,
 		ProjectManager:              projectMgr,
 		AppManager:                  AppMgr,

@@ -117,7 +117,7 @@ func (r *ResourceManager) Init() {
 			res.CreateTime = now
 			res.UpdateTime = now
 			if _, err := r.Create(res); err != nil {
-				klog.Info("create resource %s error: %s", res.Name, err.Error())
+				klog.Infof("create resource %s error: %s", res.Name, err.Error())
 			}
 		}
 	}

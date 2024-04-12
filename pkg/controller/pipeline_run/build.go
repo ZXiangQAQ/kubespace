@@ -288,6 +288,28 @@ func (p *PipelineRunController) getJobExecParam(
 			resMap["secret"] = resource.Secret.GetSecret()
 		}
 		res = resMap
+	case types.PluginParamsFromSonarQube:
+		res = nil
+		var sonarQube interface{}
+		var ok bool
+		if pluginParam.FromName == "" {
+			sonarQube, ok = envs["SONAR_QUBE_ID"]
+		} else {
+			sonarQube, ok = jobParams[pluginParam.FromName]
+		}
+		if !ok {
+			return nil, fmt.Errorf("获取SonarQube令牌参数错误，请检查流水线配置")
+		}
+		sonarQubeId, err := strconv.Atoi(fmt.Sprintf("%v", sonarQube))
+		if err != nil {
+			return nil, fmt.Errorf("获取SonarQube参数错误：" + err.Error())
+		}
+		sonar, err := p.models.SonarQubeManager.Get(uint(sonarQubeId))
+		if err != nil {
+			klog.Errorf("获取SonarQube服务器「id=%d」失败：%s", sonarQubeId, err.Error())
+			return nil, nil
+		}
+		res = sonar.GetSonarQube()
 	}
 	return res, nil
 }

@@ -68,3 +68,28 @@ func (s *SettingsImageRegistry) GetImageRegistry() *ImageRegistry {
 		Password: s.Password,
 	}
 }
+
+// SonarQube SonarScanner CLI指向的SonarQube服务器
+type SonarQube struct {
+	HostUrl string `gorm:"size:255;not null;uniqueIndex" json:"host_url"`
+	Token   string `gorm:"size:255;" json:"token"`
+}
+
+type SettingsSonarQube struct {
+	ID          uint      `gorm:"primaryKey" json:"id"`
+	Name        string    `gorm:"size:255;not null;uniqueIndex" json:"name"`
+	Description string    `gorm:"size:2000;" json:"description"`
+	HostUrl     string    `gorm:"size:255;not null" json:"host_url"`
+	Token       string    `gorm:"size:255;not null" json:"token"`
+	CreateUser  string    `gorm:"size:255;not null" json:"create_user"`
+	UpdateUser  string    `gorm:"size:255;not null" json:"update_user"`
+	CreateTime  time.Time `gorm:"not null;autoCreateTime" json:"create_time"`
+	UpdateTime  time.Time `gorm:"not null;autoUpdateTime" json:"update_time"`
+}
+
+func (s *SettingsSonarQube) GetSonarQube() *SonarQube {
+	return &SonarQube{
+		HostUrl: s.HostUrl,
+		Token:   s.Token,
+	}
+}

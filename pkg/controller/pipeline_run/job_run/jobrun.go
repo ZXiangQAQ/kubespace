@@ -32,6 +32,7 @@ func NewJobRun(models *model.Models, kubeClient *cluster.KubeClient, informerFac
 			types.BuiltinPluginBuildCodeToImage: spacelet,
 			types.BuiltinPluginExecuteShell:     spacelet,
 			types.BuiltinPluginRelease:          spacelet,
+			types.BuiltinPluginSonarQube:        spacelet,
 
 			// 轻任务直接在controller内部执行
 			types.BuiltinPluginDeployK8s:  plugins.DeployK8sPlugin{Models: models, KubeClient: kubeClient},

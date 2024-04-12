@@ -34,6 +34,12 @@ const Routes = [
   //   meta: { title: 'Ldap管理', icon: 'ldap', 'group': 'settings', object: 'cluster' }
   // },
   {
+    path: 'sonarQube',
+    name: 'settinsSonarQube',
+    component: () => import('@/views/settings/sonar_qube'),
+    meta: { title: 'SonarQube', icon: 'sonar_qube', 'group': 'settings', object: 'cluster' }
+  },
+  {
     path: 'member',
     name: 'member',
     component: () => import('@/views/settings/member/index'),

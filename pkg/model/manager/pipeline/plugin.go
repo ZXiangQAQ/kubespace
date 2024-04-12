@@ -347,6 +347,82 @@ var BuiltinPlugins = []types.PipelinePlugin{
 			},
 		},
 	},
+	{
+		Name:    "代码扫描",
+		Key:     types.BuiltinPluginSonarQube,
+		Version: "1.0",
+		Url:     types.PipelinePluginBuiltinUrl,
+		Params: types.PipelinePluginParams{
+			Params: []*types.PipelinePluginParamsSpec{
+				{
+					From:      types.PluginParamsFromEnv,
+					Default:   "",
+					FromName:  "PIPELINE_CODE_URL",
+					ParamName: "code_url",
+				},
+				{
+					From:      types.PluginParamsFromEnv,
+					Default:   "",
+					FromName:  "PIPELINE_CODE_API_URL",
+					ParamName: "code_api_url",
+				},
+				{
+					From:      types.PluginParamsFromEnv,
+					Default:   "",
+					FromName:  "PIPELINE_CODE_TYPE",
+					ParamName: "code_type",
+				},
+				{
+					From:      types.PluginParamsFromEnv,
+					Default:   "",
+					FromName:  "PIPELINE_CODE_BRANCH",
+					ParamName: "code_branch",
+				},
+				{
+					From:      types.PluginParamsFromEnv,
+					Default:   "",
+					FromName:  "PIPELINE_CODE_COMMIT_ID",
+					ParamName: "code_commit_id",
+				},
+				{
+					From:      types.PluginParamsFromCodeSecret,
+					Default:   "",
+					FromName:  "",
+					ParamName: "code_secret",
+				},
+				{
+					From:      types.PluginParamsFromPipelineResource,
+					Default:   "",
+					FromName:  "sonar_scanner_image",
+					ParamName: "sonar_scanner_image",
+				},
+				{
+					From:      types.PluginParamsFromJob,
+					Default:   "sonar-project.properties",
+					FromName:  "sonar_scanner_file",
+					ParamName: "sonar_scanner_file",
+				},
+				{
+					From:      types.PluginParamsFromJob,
+					Default:   "",
+					FromName:  "sonar_scanner_script",
+					ParamName: "sonar_scanner_script",
+				},
+				{
+					From:      types.PluginParamsFromJob,
+					Default:   "",
+					FromName:  "sonar_qube_id",
+					ParamName: "sonar_qube_id",
+				},
+				{
+					From:      types.PluginParamsFromSonarQube,
+					Default:   "",
+					FromName:  "",
+					ParamName: "sonar_qube",
+				},
+			},
+		},
+	},
 }
 
 func (p *PipelinePluginManager) Init() {

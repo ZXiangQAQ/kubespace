@@ -373,7 +373,7 @@
 
 <script>
 import { Clusterbar } from '@/views/components'
-import { PipelineStage, CodeToImage, ExecuteShell, AppDeploy, Release, DeployK8s, checkPluginJob } from '@/views/pipeline/plugin'
+import { PipelineStage, CodeToImage, ExecuteShell, AppDeploy, Release, DeployK8s, checkPluginJob, SonarQube } from '@/views/pipeline/plugin'
 import { getPipeline, updatePipeline, createPipeline } from '@/api/pipeline/pipeline'
 import { listWorkspaces } from '@/api/pipeline/workspace'
 import { getWorkspace } from '@/api/pipeline/workspace'
@@ -388,6 +388,7 @@ export default {
     CodeToImage,
     ExecuteShell,
     AppDeploy,
+    SonarQube,
     Release,
     DeployK8s
   },
@@ -404,10 +405,15 @@ export default {
       key: 'upgrade_app',
       name: '应用部署',
       component: 'AppDeploy'
+    }, {
+      key: 'sonar_qube',
+      name: '代码扫描',
+      component: 'SonarQube'
     }]
     return {
       titleName: ["流水线"],
       users: [],
+      currentComponent: 'AppDeploy',
       cellStyle: {border: 0, padding: '1px 0', 'line-height': '35px'},
       maxHeight: window.innerHeight - 295,
       loading: true,
@@ -477,7 +483,9 @@ export default {
       return m
     },
     dialogTitle() {
-      if(this.dialogType == 'edit_stage') return '编辑'
+      if(this.dialogType == 'edit_stage') 
+        return '编辑'
+      return null
     },
     originCodeTrigger() {
       if(!this.pipeline) {
@@ -496,7 +504,7 @@ export default {
   },
   methods: {
     hasAdvancedPlugins(pluginKey) {
-      return ['build_code_to_image', 'release', 'execute_shell'].indexOf(pluginKey) >= 0
+      return ['build_code_to_image', 'release', 'execute_shell', 'sonar_qube'].indexOf(pluginKey) >= 0
     },
     fetchWorkspace() {
       this.loading = true

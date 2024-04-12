@@ -37,6 +37,7 @@ var initTypes = []interface{}{
 
 	&types.SettingsSecret{},
 	&types.SettingsImageRegistry{},
+	&types.SettingsSonarQube{},
 
 	&types.Project{},
 	&types.App{},
